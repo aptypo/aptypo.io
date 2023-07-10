@@ -10,3 +10,4 @@ jobs:
       - run: |
          TETRIS_INFO=$(curl -L -H "Authorization: Bearer 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" https://api.github.com/users/aptypo/packages/container/react-tetris)
       - run: echo $TETRIS_INFO
+      - run: echo 1
