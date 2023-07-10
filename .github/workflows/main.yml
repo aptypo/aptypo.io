@@ -1,4 +1,4 @@
-name: "example-cron-action"
+name: "example-cron-action2"
 on:
   schedule:
     - cron:  '*/1 * * * *'    # At every 15th minute
@@ -11,3 +11,4 @@ jobs:
          TETRIS_INFO=$(curl -L -H "Authorization: Bearer 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" https://api.github.com/users/aptypo/packages/container/react-tetris)
       - run: echo $TETRIS_INFO
       - run: echo 1
+      - run: echo 2
