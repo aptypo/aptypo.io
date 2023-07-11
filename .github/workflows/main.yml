@@ -1,7 +1,9 @@
 name: "example-cron-action2"
 on:
-  schedule:
-    - cron:  '*/10000 * * * *'    # At every 15th minute
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
   check:
