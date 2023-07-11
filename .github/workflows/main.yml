@@ -1,7 +1,7 @@
 name: "example-cron-action2"
 on:
   schedule:
-    - cron:  '*/1 * * * *'    # At every 15th minute
+    - cron:  '*/10000 * * * *'    # At every 15th minute
 
 jobs:
   check:
@@ -9,7 +9,7 @@ jobs:
     steps:
       - run: |
          TETRIS_INFO=$(curl -L -H 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' https://api.github.com/users/${{ github.repository_owner }}/packages/container/react-tetris)
-         echo "TETRIS_INFO=$TETRIS_INFO" >> $GITHUB_ENV
+         echo $TETRIS_INFO
       - run: echo $TETRIS_INFO
       - run: echo 1
       - run: echo 2
