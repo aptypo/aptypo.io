@@ -12,6 +12,7 @@ jobs:
       - run: |
          TETRIS_INFO=$(curl -L -H 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' https://api.github.com/users/${{ github.repository_owner }}/packages/container/react-tetris)
          echo $TETRIS_INFO
+         echo 1
       - run: echo $TETRIS_INFO
       - run: echo 1
       - run: echo 2
