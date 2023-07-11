@@ -10,9 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-         TETRIS_INFO=$(curl -L -H 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' https://api.github.com/users/${{ github.repository_owner }}/packages/container/react-tetris)
+         TETRIS_INFO=$(curl -L -H 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' https://api.github.com/users/${{ github.repository_owner }}/packages/container/react-tetris  | jq .updated_at)
          echo $TETRIS_INFO
          echo 1
-      - run: echo $TETRIS_INFO
-      - run: echo 1
+      - run: echo 'NUM_OPEN_ISSUES=1' >> $GITHUB_ENV
+      - run: echo $NUM_OPEN_ISSUES
       - run: echo 2
