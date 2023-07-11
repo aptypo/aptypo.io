@@ -16,3 +16,7 @@ jobs:
          echo 'TETRIS_UPDATED_AT='$tetris_updated_at >> $GITHUB_ENV
          echo $TETRIS_UPDATED_AT
          echo $(date -d $tetris_updated_at +"%s")
+      - name: foo
+        run: |
+          echo $TETRIS_UPDATED_AT
+          echo $tetris_updated_at
