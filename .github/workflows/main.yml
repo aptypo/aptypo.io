@@ -9,9 +9,10 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - run: |
+      - name: get Tetris update date
+        run: |
          tetris_updated_at=$(curl -L -H 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' https://api.github.com/users/${{ github.repository_owner }}/packages/container/react-tetris  | jq .updated_at)
          echo $tetris_updated_at
          echo 'TETRIS_UPDATED_AT='$tetris_updated_at >> $GITHUB_ENV
-      - run: echo $TETRIS_UPDATED_AT
-      - run: echo 2
+         echo date -d '06/12/2012 07:21:22' +"%s"
+         echo date -d $TETRIS_UPDATED_AT +"%s"
