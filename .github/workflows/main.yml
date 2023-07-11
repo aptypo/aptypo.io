@@ -9,14 +9,17 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - name: get Tetris update date
+      - name: Get package update date
+        run: |
+         updated_at=$(curl -L -H 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' https://api.github.com/users/${{ github.repository_owner }}/packages/container/aptypo.io  | jq -r .updated_at)
+         updated_at_timestamp=$(date -d $updated_at +"%s")
+         echo 'UPDATED_AT='$updated_at_timestamp >> $GITHUB_ENV    
+      - name: Get Tetris package update date
         run: |
          tetris_updated_at=$(curl -L -H 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' https://api.github.com/users/${{ github.repository_owner }}/packages/container/react-tetris  | jq -r .updated_at)
-         echo $tetris_updated_at
-         echo 'TETRIS_UPDATED_AT='$tetris_updated_at >> $GITHUB_ENV
-         echo $TETRIS_UPDATED_AT
-         echo $(date -d $tetris_updated_at +"%s")
+         tetris_updated_at_timestamp=$(date -d $tetris_updated_at +"%s")
+         echo 'TETRIS_UPDATED_AT='$tetris_updated_at_timestamp >> $GITHUB_ENV
       - name: foo
+        if: $TETRIS_UPDATED_AT > $UPDATED_AT
         run: |
-          echo $TETRIS_UPDATED_AT
-          echo $tetris_updated_at
+          echo 1
