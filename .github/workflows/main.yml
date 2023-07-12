@@ -19,6 +19,8 @@ jobs:
          tetris_updated_at=$(curl -L -H 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' https://api.github.com/users/${{ github.repository_owner }}/packages/container/react-tetris  | jq -r .updated_at)
          tetris_updated_at_timestamp=$(date -d $tetris_updated_at +"%s")
          echo 'TETRIS_UPDATED_AT='$tetris_updated_at_timestamp >> $GITHUB_ENV
+      - name: Checkout repository
+        uses: actions/checkout@v2.3.4
       - name: bar
         run: |
           echo $(aws lightsail)
