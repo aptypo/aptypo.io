@@ -1,0 +1,25 @@
+{
+    "serviceName": "$AWS_SERVICE_NAME",
+    "containers": {
+        "$AWS_CONTAINER_NAME": {
+            "image": "$AWS_IMAGE_URL",
+            "command": [],
+            "environment": {},
+            "ports": {
+                "80": "HTTP"
+            }
+        }
+    },
+    "publicEndpoint": {
+        "containerName": "$AWS_CONTAINER_NAME",
+        "containerPort": 80,
+        "healthCheck": {
+            "healthyThreshold": 2,
+            "unhealthyThreshold": 10,
+            "timeoutSeconds": 60,
+            "intervalSeconds": 300,
+            "path": "/",
+            "successCodes": "200-499"
+        }
+    }
+}
