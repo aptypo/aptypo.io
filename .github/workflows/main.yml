@@ -27,7 +27,7 @@ jobs:
           echo $(ls)
           echo 2
           echo $(envsubst < foo)
-          echo $(cat lightsail-create-container-service-deployment.json)
+          echo $(cat .github/workflows/lightsail-create-container-service-deployment.json)
       - name: foo
         if: ${{ env.TETRIS_UPDATED_AT > env.UPDATED_AT }}
         run: |
