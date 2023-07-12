@@ -22,9 +22,10 @@ jobs:
       - name: bar
         run: |
           echo $(aws lightsail)
+          echo $(ls)
+          echo 2
           echo $(envsubst < foo)
           echo $(cat lightsail-create-container-service-deployment.json)
-          echo $(ls)
       - name: foo
         if: ${{ env.TETRIS_UPDATED_AT > env.UPDATED_AT }}
         run: |
