@@ -21,7 +21,7 @@ jobs:
          echo 'TETRIS_UPDATED_AT='$tetris_updated_at_timestamp >> $GITHUB_ENV
       - name: bar
         run: |
-          echo aws lightsail
+          echo $(aws lightsail)
       - name: foo
         if: ${{ env.TETRIS_UPDATED_AT > env.UPDATED_AT }}
         run: |
