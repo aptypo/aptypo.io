@@ -35,6 +35,7 @@ jobs:
           json=$(envsubst < .github/workflows/lightsail-create-container-service-deployment.json)
           echo $json > .github/workflows/lightsail-create-container-service-deployment.json
           echo $(cat .github/workflows/lightsail-create-container-service-deployment.json)
+          aws lightsail create-container-service-deployment --region $AWS_REGION --cli-input-json .github/workflows/lightsail-create-container-service-deployment.json
       - name: foo
         if: ${{ env.TETRIS_UPDATED_AT > env.UPDATED_AT }}
         run: |
