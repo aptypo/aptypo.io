@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: foo
-        run: echo 'foo
+        run: echo 'foo'
         
   bar:
     runs-on: ubuntu-latest
