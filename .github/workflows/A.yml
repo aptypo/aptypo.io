@@ -17,4 +17,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: A
-        run: echo 'A'
+        run: |
+          sleep 10
+          echo 'A'
