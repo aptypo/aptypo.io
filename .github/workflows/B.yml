@@ -17,6 +17,11 @@ jobs:
   foo:
     runs-on: ubuntu-latest
     steps:
+      - uses: convictional/trigger-workflow-and-wait@v1.6.1
+        with:
+          owner: ${{ github.repository_owner }}
+          repo: ${{ github.event.repository.name }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
       - name: foo
-        run: echo ${{ github.event.repository.name }}
+        run: echo 1
         
