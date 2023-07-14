@@ -44,8 +44,8 @@ jobs:
       - name: Update package update date
         if: ${{ env.TETRIS_UPDATED_AT > env.UPDATED_AT }}
         run: |
-          echo $(date -u +"%Y-%m-%dT%H:%M:%SZ)
-          echo 'UPDATED_AT='$(date -u +"%Y-%m-%dT%H:%M:%SZ) >> $GITHUB_ENV
+          echo $(date -u +"%Y-%m-%dT%H:%M:%SZ")
+          echo 'UPDATED_AT='$(date -u +"%Y-%m-%dT%H:%M:%SZ") >> $GITHUB_ENV
       - name: Get Lightsail update date
         run: |
           echo $UPDATED_AT
