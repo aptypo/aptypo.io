@@ -19,5 +19,7 @@ jobs:
     steps:
       - name: A
         run: |
+          exit 1
+          foobar
           sleep 10
           echo 'A'
