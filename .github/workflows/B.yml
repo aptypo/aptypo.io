@@ -22,6 +22,7 @@ jobs:
           owner: ${{ github.repository_owner }}
           repo: ${{ github.event.repository.name }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          workflow_file_name: A.yml
       - name: foo
         run: echo 1
         
