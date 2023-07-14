@@ -5,7 +5,7 @@ on:
     - cron: '*/5 * * * *'
 
 jobs:
-  check:
+  deploy:
     runs-on: ubuntu-latest
     permissions: write-all
     timeout-minutes: 30
@@ -22,17 +22,11 @@ jobs:
          updated_at=$(curl -L -H 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' https://api.github.com/users/${{ github.repository_owner }}/packages/container/aptypo.io  | jq -r .updated_at)
          updated_at_timestamp=$(date -d $updated_at +"%s")
          echo 'UPDATED_AT='$updated_at_timestamp >> $GITHUB_ENV
-         echo $updated_at
-         echo $updated_at_timestamp
-         exit 0
       - name: Get Tetris package update date
         run: |
-         echo $UPDATED_AT
          tetris_updated_at=$(curl -L -H 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' https://api.github.com/users/${{ github.repository_owner }}/packages/container/react-tetris  | jq -r .updated_at)
          tetris_updated_at_timestamp=$(date -d $tetris_updated_at +"%s")
          echo 'TETRIS_UPDATED_AT='$tetris_updated_at_timestamp >> $GITHUB_ENV
-         echo $tetris_updated_at
-         echo $tetris_updated_at_timestamp
       - name: Trigger Docker build
         uses: convictional/trigger-workflow-and-wait@v1.6.1
         if: ${{ env.TETRIS_UPDATED_AT > env.UPDATED_AT }}
@@ -49,13 +43,9 @@ jobs:
       - name: Get Lightsail update date
         run: |
           echo $UPDATED_AT
-          echo $AWS_REGION
           lightsail_created_at=$(aws lightsail get-container-service-deployments --service-name $AWS_SERVICE_NAME --region $AWS_REGION | jq -r '.deployments[] | select( .state == "ACTIVE") | .createdAt')
           lightsail_created_at_timestamp=$(date -d $lightsail_created_at +"%s")
           echo 'LIGHTSAIL_CREATED_AT='$lightsail_created_at_timestamp >> $GITHUB_ENV
-          echo $lightsail_created_at
-          echo $lightsail_created_at_timestamp
-          echo $LIGHTSAIL_CREATED_AT
       - name: Checkout repository
         if: ${{ env.UPDATED_AT > env.LIGHTSAIL_CREATED_AT }}
         uses: actions/checkout@v2.3.4
