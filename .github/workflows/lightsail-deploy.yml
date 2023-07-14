@@ -42,7 +42,6 @@ jobs:
           echo 'UPDATED_AT='$(date -u +"%Y-%m-%dT%H:%M:%SZ") >> $GITHUB_ENV
       - name: Get Lightsail update date
         run: |
-          echo $UPDATED_AT
           lightsail_created_at=$(aws lightsail get-container-service-deployments --service-name $AWS_SERVICE_NAME --region $AWS_REGION | jq -r '.deployments[] | select( .state == "ACTIVE") | .createdAt')
           lightsail_created_at_timestamp=$(date -d $lightsail_created_at +"%s")
           echo 'LIGHTSAIL_CREATED_AT='$lightsail_created_at_timestamp >> $GITHUB_ENV
